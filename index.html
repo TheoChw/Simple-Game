@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Simple Game About Jumping</title>
+   
+    <link rel="stylesheet" href="Style.css">
+    <script src=""> </script>
+
+   
+        
+</head>
+
+
+<body>
+    <h1 id="gameName" class="title">A Simple Game About Jumping</h1> 
+    <div class="container"> 
+        <div class="gameover">Game Over</div> 
+        <div id="scorecount">Your score : 0</div> 
+        <div class="obstacle animateobstacle"></div> 
+        <div class="dragon" style="left: 426px;"></div> 
+    </div> 
+    <script>
+    console.log('HELLO'); 
+        cross = true; 
+        score = 0; 
+
+        window.onload = function() {
+
+            while (true) {
+            dragon = document.querySelector('.dragon'); 
+    
+            dragony = parseInt(window.getComputedStyle( 
+            dragon, null).getPropertyValue('top')); 
+
+            dragon.style.top = dragony + 100 + "px";    
+            }
+        }
+    
+
+
+
+
+        document.onkeydown = function(e) { 
+            /*
+            console.log(e.keyCode); 
+            */
+
+            
+        
+            
+            
+            if (e.keyCode == 38) { 
+                dragon = document.querySelector('.dragon'); 
+    
+                dragony = parseInt(window.getComputedStyle( 
+                dragon, null).getPropertyValue('top')); 
+
+                dragon.style.top = dragony - 100 + "px"; 
+               /* dragon.classList.remove('animatedragon2');
+                dragon = document.querySelector('.dragon'); 
+                
+                dragon.classList.add('animatedragon'); 
+                
+                setTimeout(() => { 
+                    dragon.classList.remove('animatedragon'); 
+                }, 700); */
+                console.log('Up arrow')
+            } 
+            if (e.keyCode == 40) { 
+
+                dragon = document.querySelector('.dragon'); 
+    
+                dragony = parseInt(window.getComputedStyle( 
+                dragon, null).getPropertyValue('top')); 
+
+                dragon.style.top = dragony + 100 + "px"; 
+                /*dragon.classList.remove('animatedragon');
+                dragon = document.querySelector('.dragon'); 
+                dragon.classList.add('animatedragon2'); 
+              
+                setTimeout(() => { 
+                    dragon.classList.remove('animatedragon2'); 
+                }, 700); */
+                console.log('Down Arrow')
+            } 
+            
+            if (e.keyCode == 37) { // 37
+                dragon = document.querySelector('.dragon'); 
+    
+                dragonx = parseInt(window.getComputedStyle( 
+                    dragon, null).getPropertyValue('left')); 
+    
+                dragon.style.left = dragonx - 100 + "px"; 
+                console.log('Left arrow')
+            } 
+            
+            if (e.keyCode == 39) { 
+                dragon = document.querySelector('.dragon'); 
+    
+                dragonx = parseInt(window.getComputedStyle( 
+                    dragon, null).getPropertyValue('left')); 
+                
+                dragon.style.left = dragonx + 100 + "px"; 
+                console.log('Right Arrow')
+            } 
+        } 
+        setInterval(() => { 
+            dragon = document.querySelector('.dragon'); 
+            gameover = document.querySelector('.gameover'); 
+            obstacle = document.querySelector('.obstacle'); 
+    
+            dx = parseInt(window.getComputedStyle( 
+                dragon, null).getPropertyValue('left')); 
+    
+            dy = parseInt(window.getComputedStyle( 
+                dragon, null).getPropertyValue('bottom')); 
+    
+            ox = parseInt(window.getComputedStyle( 
+                obstacle, null).getPropertyValue('left')); 
+    
+            oy = parseInt(window.getComputedStyle( 
+
+                obstacle, null).getPropertyValue('bottom')); 
+    
+            offsetx = Math.abs(dx - ox); 
+
+            offsety = Math.abs(dy - oy); 
+
+            /*
+            This tells the server the offset value between the dragon and the cactus 
+            console.log(offsetx, offsety);                                           
+            */
+           
+            
+    
+            if (offsetx < 120 && offsety <= 144) { 
+
+                if (score != 0) 
+
+                    scorecount.innerHTML = "Your score : " + score; 
+
+                gameover.style.visibility = 'visible'; 
+
+                obstacle.classList.remove('animateobstacle'); 
+
+            } else if (offsetx < 125 && cross) { 
+
+                score += 1; 
+
+                updateScore(score); 
+
+                cross = false; 
+
+                setTimeout(() => { 
+
+                    cross = true; 
+
+                }, 1000); 
+
+                setInterval(() => { 
+
+                    obsanidur = parseFloat(window 
+
+                    .getComputedStyle(obstacle, null) 
+
+                    .getPropertyValue('animation-duration')); 
+    
+                    obstacle.style.animationDuration 
+
+                        = obsanidur - 0.01 + 's'; 
+                }, 500); 
+            } 
+        }, 10); 
+    
+        function updateScore(score) { 
+
+            scorecount.innerHTML = "Your score : " + score; 
+        } 
+    </script>
+
+</body>
+
+</html>
